@@ -8,7 +8,7 @@ const SignUpPage = () => {
       <TextInput placeholder="Email" style={styles.input} />
       <TextInput placeholder="Password" secureTextEntry={true} style={styles.input} />
       <TextInput placeholder="Confirm Password" secureTextEntry={true} style={styles.input} />
-      <Button title="Sign Up" onPress={() => {}} />
+      <Button title="Sign Up" color={'white'} onPress={() => {}} />
     </View>
   );
 };
