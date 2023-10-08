@@ -8,6 +8,7 @@ import ProfilePage from './components/Profile';
 import TipsAndTricksPage from './components/TipsTricks';
 import MaintenanceSchedulePage from './components/MaintenanceSchedule';
 import MaintenanceHistoryPage from './components/MaintenanceHistory';
+import FindMechanicPage from './components/FindMechanic';
 
 const Stack = createNativeStackNavigator() 
 export default function App() {
@@ -25,6 +26,8 @@ export default function App() {
             <Stack.Screen name="TipsTricks" component={TipsAndTricksPage}/>
             <Stack.Screen name="MaintenanceSchedule" component={MaintenanceSchedulePage}/>
             <Stack.Screen name="MaintenanceHistory" component={MaintenanceHistoryPage}/>
+            <Stack.Screen name="FindMechanic" component={FindMechanicPage}/>
+
           </Stack.Navigator>
         </NavigationContainer>
       );

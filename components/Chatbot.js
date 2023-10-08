@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView, Text, TextInput, TouchableOpacity, FlatList,
-  KeyboardAvoidingView, ActivityIndicator, Platform,
+  KeyboardAvoidingView, ActivityIndicator, Platform, View
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../styles/styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { OPENAI_KEY } from '@env';
 
-const OPENAI_KEY = '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'; 
+
+
 
 
 const Chatbot = () => {
@@ -89,12 +92,11 @@ const Chatbot = () => {
         keyExtractor={(item, index) => index.toString()}
         style={styles.messageContainer}
       />
-  
-      {}
+    
       {isLoading && (
         <ActivityIndicator size="large" color="#0000ff" style={styles.loadingIndicator} />
       )}
-  
+    
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.inputContainer}
@@ -109,6 +111,21 @@ const Chatbot = () => {
           <Text style={styles.sendButtonText}>Send</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
+      
+    <View style={styles.footer}>
+      <TouchableOpacity onPress={() => {}}>
+        <Icon name="home" size={20} color="#2980B9" />
+        <Text style={styles.footerText}>Home</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+        <Icon name="user" size={20} color="#2980B9" />
+        <Text style={styles.footerText}>Profile</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
+        <Icon name="comments" size={20} color="#2980B9" />
+        <Text style={styles.footerText}>Chat</Text>
+      </TouchableOpacity>
+    </View>
     </SafeAreaView>
   );
 }
