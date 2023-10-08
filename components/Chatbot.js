@@ -76,9 +76,9 @@ const Chatbot = ({navigation}) => {
   };
 
   const renderItem = ({ item }) => (
-    <SafeAreaView style={item.role === 'user' ? styles.userMessage : styles.botMessage}>
+    <View style={item.role === 'user' ? styles.userMessage : styles.botMessage}>
       <Text>{item.content}</Text>
-    </SafeAreaView>
+    </View>
   );
 
   return (
@@ -90,7 +90,6 @@ const Chatbot = ({navigation}) => {
           keyExtractor={(item, index) => index.toString()}
           style={styles.messageContainer}
         />
-      
         {isLoading && (
           <ActivityIndicator size="large" color="#0000ff" style={styles.loadingIndicator} />
         )}
