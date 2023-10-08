@@ -1,28 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
-  KeyboardAvoidingView,
-  Platform
+  SafeAreaView, Text, TextInput, TouchableOpacity, FlatList,
+  KeyboardAvoidingView, ActivityIndicator, Platform,
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../styles/styles';
 
-import { REACT_APP_OPENAI_API_KEY } from "@env";
-
-
+const OPENAI_KEY = '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'; 
 
 
 const Chatbot = () => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Fetch chat history from storage when the component mounts
     const fetchChatHistory = async () => {
       try {
         const storedHistory = await AsyncStorage.getItem('chatHistory');
@@ -31,55 +24,77 @@ const Chatbot = () => {
         console.error("Error fetching chat history from storage:", error);
       }
     };
-
     fetchChatHistory();
   }, []);
 
   const handleSend = async () => {
     if (message.trim() === '') return;
-
-    const userMessage = { type: 'user', text: message.trim() };
+  
+    const userMessage = { role: 'user', content: message.trim() };
     setChatHistory(currentHistory => [...currentHistory, userMessage]);
-
+    
+    setIsLoading(true);
+  
+    const chatData = {
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          "role": "system",
+          "content": "You're a car maintenance expert"
+        },
+        userMessage
+      ],
+      temperature: 1,
+      max_tokens: 256,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0
+    };
+  
+    console.log("Sending to GPT model:", chatData);
+  
     try {
-      const response = await axios.post('https://api.openai.com/v1/engines/davinci/completions', {
-        prompt: message,
-        max_tokens: 150,
-      }, {
+      const response = await axios.post('https://api.openai.com/v1/chat/completions', chatData, {
         headers: {
-          'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+          'Authorization': `Bearer ${OPENAI_KEY}`,
           'Content-Type': 'application/json',
         },
       });
-
-      const botResponseText = response.data.choices[0].text.trim();
-      const botMessage = { type: 'bot', text: botResponseText };
-      setChatHistory(currentHistory => [...currentHistory, userMessage, botMessage]);
-
-      // Store the updated chat history
-      await AsyncStorage.setItem('chatHistory', JSON.stringify([...chatHistory, userMessage, botMessage]));
-
+  
+      const botResponseText = response.data.choices[0]?.message.content.trim();
+      const botMessage = { role: 'bot', content: botResponseText };
+      const updatedHistory = [...chatHistory, userMessage, botMessage];
+      
+      setChatHistory(updatedHistory);
+      await AsyncStorage.setItem('chatHistory', JSON.stringify(updatedHistory));
     } catch (error) {
       console.error("Error fetching response:", error);
     }
-
+  
+    setIsLoading(false);
     setMessage('');
   };
 
   const renderItem = ({ item }) => (
-    <View style={item.type === 'user' ? styles.userMessage : styles.botMessage}>
-      <Text>{item.text}</Text>
-    </View>
+    <SafeAreaView style={item.role === 'user' ? styles.userMessage : styles.botMessage}>
+      <Text>{item.content}</Text>
+    </SafeAreaView>
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={chatHistory}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         style={styles.messageContainer}
       />
+  
+      {}
+      {isLoading && (
+        <ActivityIndicator size="large" color="#0000ff" style={styles.loadingIndicator} />
+      )}
+  
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.inputContainer}
@@ -94,7 +109,7 @@ const Chatbot = () => {
           <Text style={styles.sendButtonText}>Send</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-    </View>
+    </SafeAreaView>
   );
 }
 

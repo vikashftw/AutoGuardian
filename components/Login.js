@@ -20,7 +20,7 @@ const LoginPage = ({navigation}) => {
             <TextInput placeholder="Password" secureTextEntry={true} style={styles.input} />
             <TouchableOpacity 
                 style={{flexDirection:'column', alignItems:'start', paddingLeft: 5}}
-                onPress={() => {navigation.navigate('SignUp')}}
+                onPress={() => {navigation.navigate('HomePage')}}
             >
                 <Text style={styles.underlinedText}>Forgot Password</Text>
             </TouchableOpacity>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     marginRight: 10, 
   },
   loginInfo: {
-    flex: 'col',
+    flexDirection: 'column',
     gap: 7,
   },
   loginBtnStyle:{
