@@ -10,30 +10,40 @@ const LoginPage = ({navigation}) => {
     <View style={styles.container}>
         <View style={styles.headerContainer}>
             <Text style={styles.headerText}>AutoGuardian</Text>
-            <Image source={logo} />
+            <Image 
+                style={{height:50}}
+                source={logo}
+            />
         </View>
         <View style={styles.loginInfo}>
             <TextInput placeholder="Email" style={styles.input} />
             <TextInput placeholder="Password" secureTextEntry={true} style={styles.input} />
+            <TouchableOpacity 
+                style={{flexDirection:'column', alignItems:'start', paddingLeft: 5}}
+                onPress={() => {navigation.navigate('SignUp')}}
+            >
+                <Text style={styles.underlinedText}>Forgot Password</Text>
+            </TouchableOpacity>
             <View style={styles.container}>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
+                        // Handle login button press
                     }}
-                >
-                <Text>Login</Text>    
-            </TouchableOpacity>
-        </View>        
-            <View style={{flexDirection:'row', alignItems:'center', }}>
-                <Image  source={google_icon}/>
+                    >
+                    <Text>Login</Text>
+                </TouchableOpacity>
+            </View>        
+            <View style={{flexDirection:'row', alignItems:'center', justifyContent: 'center' }}>
+                {/* <Image  source={google_icon}/> */}
                 <Button style={{borderWidth:2}}title="Sign in with Google" color={'white'} onPress={() => {}} />
             </View>
-            <View style={{flexDirection:'row', alignItems:'center', }}>
-                <Image source={statefarm_icon}/>
+            <View style={{flexDirection:'row', alignItems:'center', justifyContent: 'center' }}>
+                {/* <Image source={statefarm_icon}/> */}
                 <Button title="Sign in with StateFarm" color={'white'} onPress={() => {}} />
             </View>
             <TouchableOpacity onPress={() => {navigation.navigate('SignUp')}}>
-                <Text style={styles.stateFarmText}>Create an account</Text>
+                <Text style={styles.underlinedText}>Create an account</Text>
             </TouchableOpacity>
         </View>
     </View>
@@ -73,9 +83,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 5,
   },
-  stateFarmText: {
+  underlinedText: {
     textDecorationLine: 'underline',
-    marginTop: 20,
     color: '#FFF',
     textAlign: 'center',
   },
