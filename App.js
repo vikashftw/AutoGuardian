@@ -7,6 +7,8 @@ import HomePage from './components/HomePage';
 import { useState, useEffect } from 'react';
 import { supabase } from './supabase';
 import ProfilePage from './components/Profile';
+import TipsAndTricksPage from './components/TipsTricks';
+import MaintenanceSchedulePage from './components/MaintenanceSchedule';
 
 const Stack = createNativeStackNavigator() 
 export default function App() {
@@ -39,6 +41,8 @@ export default function App() {
             <Stack.Screen name="Chatbot" component={ChatbotPage}/>
             <Stack.Screen name="HomePage" component={HomePage}/>
             <Stack.Screen name="Profile" component={ProfilePage}/>
+            <Stack.Screen name="TipsTricks" component={TipsAndTricksPage}/>
+            <Stack.Screen name="MaintenanceSchedule" component={MaintenanceSchedulePage}/>
           </Stack.Navigator>
         </NavigationContainer>
       );
