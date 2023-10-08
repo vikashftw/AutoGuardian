@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Button, TextInput  } from 'react-native';
-import DatePicker from 'react-native-datepicker'; 
+import { View, Text, TouchableOpacity, StyleSheet, Button, TextInput, SafeAreaView  } from 'react-native';
+import DatePicker from '@react-native-community/datetimepicker'
 import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Platform, DatePickerIOS } from 'react-native';
+import { Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -22,7 +22,7 @@ const PlatformDatePicker = ({ date, onDateChange, ...props }) => {
   // For mobile, use the DatePicker from react-native-datepicker
   return (
     <DatePicker
-      date={date}
+    value={date}
       mode="date"
       format="YYYY-MM-DD"
       confirmBtnText="Confirm"
@@ -92,7 +92,7 @@ const MaintenanceSchedulePage = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Maintenance Schedule</Text>
 
       <View style={styles.inputGroup}>
@@ -144,7 +144,7 @@ const MaintenanceSchedulePage = ({ navigation }) => {
                     <Text style={styles.footerText}>Chat</Text>
                 </TouchableOpacity>
             </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#F3F4F6',  
-      padding: 20,
+      margin:20,
     },
     headerContainer: {
       flexDirection: 'row',

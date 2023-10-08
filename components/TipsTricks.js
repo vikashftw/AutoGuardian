@@ -1,4 +1,5 @@
 import React from 'react';
+import { SafeAreaView } from 'react-native';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity  } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -18,28 +19,30 @@ const TipsAndTricksPage = ({ navigation }) => {
     ];
 
     return (
-        <ScrollView style={styles.container}>
-            <Text style={styles.sectionTitle}>Tips & Tricks</Text>
-            {tips.map((tip, index) => (
-                <View key={index} style={styles.tipCard}>
-                    <Text style={styles.tipText}>{tip}</Text>
+        <SafeAreaView style={{flex:1}}>
+            <ScrollView style={styles.container}>
+                <Text style={styles.sectionTitle}>Tips & Tricks</Text>
+                {tips.map((tip, index) => (
+                    <View key={index} style={styles.tipCard}>
+                        <Text style={styles.tipText}>{tip}</Text>
+                    </View>
+                ))}
+                <View style={styles.footer}>
+                    <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+                        <Icon name="home" size={20} color="#2980B9" />
+                        <Text style={styles.footerText}>Home</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                        <Icon name="user" size={20} color="#2980B9" />
+                        <Text style={styles.footerText}>Profile</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
+                        <Icon name="comments" size={20} color="#2980B9" />
+                        <Text style={styles.footerText}>Chat</Text>
+                    </TouchableOpacity>
                 </View>
-            ))}
-            <View style={styles.footer}>
-                <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
-                    <Icon name="home" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Icon name="user" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Profile</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
-                    <Icon name="comments" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Chat</Text>
-                </TouchableOpacity>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 
