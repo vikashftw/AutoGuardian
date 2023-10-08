@@ -64,17 +64,23 @@ const MaintenanceSchedulePage = ({ navigation }) => {
     }
   
     nextDate.setMonth(lastDate.getMonth() + parseInt(frequency));
-    const formattedNextDate = timeBasedNextDate || nextDate.toDateString();
-  
-    setNextMaintenance(formattedNextDate);
+    setNextMaintenance(nextDate); 
   }, [lastMaintenance, frequency, mileage]);
+
+      let nextMaintenanceText;
+    if (typeof nextMaintenance === 'string') {
+      nextMaintenanceText = nextMaintenance;
+    } else {
+      nextMaintenanceText = nextMaintenance.toLocaleDateString();
+
+    }
 
   const saveMaintenanceInfo = async () => {
     try {
       const maintenanceData = {
         lastMaintenance: lastMaintenance,
         frequency: frequency,
-        nextMaintenance: nextMaintenance.toISOString()
+        nextMaintenance: nextMaintenance.toISOString().split('T')[0]
       };
   
       await AsyncStorage.setItem('maintenanceData', JSON.stringify(maintenanceData));
@@ -119,7 +125,7 @@ const MaintenanceSchedulePage = ({ navigation }) => {
         </Picker>
       </View>
 
-      <Text>Next Maintenance Due: {nextMaintenance.toDateString()}</Text>
+      <Text>Next Maintenance Due: {nextMaintenanceText}</Text>
 
       <Button title="Save" onPress={saveMaintenanceInfo} />
 

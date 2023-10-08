@@ -4,6 +4,8 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'rea
 import logo from '../assets/logo.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
+
 
 
 
@@ -11,20 +13,24 @@ const HomePage = ({ navigation }) => {
 
   const [maintenanceData, setMaintenanceData] = useState(null);
 
-  useEffect(() => {
-    const fetchMaintenanceData = async () => {
-      try {
-        const data = await AsyncStorage.getItem('maintenanceData');
-        if (data) {
-          setMaintenanceData(JSON.parse(data));
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchMaintenanceData = async () => {
+        try {
+          const data = await AsyncStorage.getItem('maintenanceData');
+          if (data) {
+            setMaintenanceData(JSON.parse(data));
+          }
+        } catch (error) {
+          console.error('Failed to fetch maintenance data: ', error);
         }
-      } catch (error) {
-        console.error('Failed to fetch maintenance data: ', error);
-      }
-    };
-
-    fetchMaintenanceData();
-  }, []);
+      };
+  
+      fetchMaintenanceData();
+      
+      return () => {}; // Cleanup
+    }, [])
+  );
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -39,7 +45,7 @@ const HomePage = ({ navigation }) => {
         <StatusSection />
 
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-          <FeatureCards navigation={navigation} />
+        <FeatureCards navigation={navigation} maintenanceData={maintenanceData} />
         </ScrollView>
 
         <View style={styles.scrollIndicatorContainer}>
