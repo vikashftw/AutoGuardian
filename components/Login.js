@@ -1,11 +1,31 @@
 import React from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import logo from '../assets/logo.png';
+import { useState } from 'react';
 import google_icon from '../assets/google_icon.png';
 import statefarm_icon from '../assets/statefarm_icon.png';
-
+import { supabase } from '../supabase'; 
 
 const LoginPage = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    setLoading(true)
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+
+    if (error) Alert.alert(error.message)
+    else{
+      navigation.navigate('Chatbot')
+    }
+    setLoading(false)
+  };
+
+
   return (
     <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -16,27 +36,42 @@ const LoginPage = ({navigation}) => {
             />
         </View>
         <View style={styles.loginInfo}>
-            <TextInput placeholder="Email" style={styles.input} />
-            <TextInput placeholder="Password" secureTextEntry={true} style={styles.input} />
+            <TextInput 
+              placeholder="Email" 
+              style={styles.input}
+              onChangeText={setEmail}
+            />
+            <TextInput 
+              placeholder="Password" 
+              secureTextEntry={true} 
+              style={styles.input} 
+              onChangeText={setPassword}
+            />
             <TouchableOpacity 
                 style={{flexDirection:'column', alignItems:'start', paddingLeft: 5}}
                 onPress={() => {navigation.navigate('HomePage')}}
             >
                 <Text style={styles.underlinedText}>Forgot Password</Text>
             </TouchableOpacity>
-            <View style={styles.container}>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                        // Handle login button press
-                        console.log("Trying to navigate to Chatbot");
-                        navigation.navigate('Chatbot');
-                    }}
-                    >
-                    <Text>Login</Text>
-                </TouchableOpacity>
-            </View>        
-            <View style={{flexDirection:'row', alignItems:'center', justifyContent: 'center' }}>
+            <TouchableOpacity
+              style={{
+                marginHorizontal:100,
+                marginVertical:15,
+                flexDirection: 'row',
+                backgroundColor: 'white',
+                borderRadius: 5,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingVertical: 6,  
+                paddingHorizontal: 8  
+              }}
+              onPress={handleLogin}
+            >
+              <Text style={{color: 'black', fontSize: 20}}>Login</Text>
+            </TouchableOpacity>
+            <View 
+              style={{flexDirection:'row', alignItems:'center', justifyContent: 'center'}}
+            >
                 {/* <Image  source={google_icon}/> */}
                 <Button style={{borderWidth:2}}title="Sign in with Google" color={'white'} onPress={() => {}} />
             </View>
