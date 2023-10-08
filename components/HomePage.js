@@ -45,7 +45,7 @@ const HomePage = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                 <Text style={styles.footerText}>Profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
                 <Text style={styles.footerText}>Chat</Text>
             </TouchableOpacity>
         </View>
@@ -144,15 +144,23 @@ const styles = StyleSheet.create({
       color: '#D62311',
     },
     footer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flex: 1,
-    },
-    footerText: {
-      fontSize: 18,
-      color: 'white',
-    },
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        borderTopWidth: 2,
+        borderTopColor: 'rgba(255, 255, 255, 0.2)',  // Semi-transparent white
+        paddingVertical: 10,
+      },
+      footerIcon: {
+        width: 28,
+        height: 28,
+        tintColor: 'white',
+      },
+      footerText: {
+        fontSize: 20,
+        color: 'white',
+        fontWeight: '500',
+      },
   });
 
   export default HomePage;
