@@ -3,13 +3,28 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import SignUpPage from './components/Signup';
 import ChatbotPage from './components/Chatbot';
+import { useState, useEffect } from 'react';
+import { supabase } from './supabase';
 
 const Stack = createNativeStackNavigator() 
 export default function App() {
+  const [initialRoute, setInitialRoute] = useState("Login");
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    const user = supabase.auth.user();
+    alert(user.email)
+    if (user) {
+      setInitialRoute("Chatbot");
+    }
+  };
+
   return (
         <NavigationContainer>
           <Stack.Navigator 
-            initialRouteName="Login"
+            initialRouteName={initialRoute}
             screenOptions={{headerShown:false}}
           >
             <Stack.Screen name="Login" component={LoginPage} />
