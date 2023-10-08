@@ -54,13 +54,24 @@ const LoginPage = ({navigation}) => {
                 <Text style={styles.underlinedText}>Forgot Password</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.button}
+              style={{
+                marginHorizontal:100,
+                marginVertical:15,
+                flexDirection: 'row',
+                backgroundColor: 'white',
+                borderRadius: 5,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingVertical: 6,  
+                paddingHorizontal: 8  
+              }}
               onPress={handleLogin}
             >
-                <Text>Login</Text>
+              <Text style={{color: 'black', fontSize: 20}}>Login</Text>
             </TouchableOpacity>
-
-            <View style={{flexDirection:'row', alignItems:'center', justifyContent: 'center' }}>
+            <View 
+              style={{flexDirection:'row', alignItems:'center', justifyContent: 'center'}}
+            >
                 {/* <Image  source={google_icon}/> */}
                 <Button style={{borderWidth:2}}title="Sign in with Google" color={'white'} onPress={() => {}} />
             </View>

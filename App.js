@@ -11,11 +11,12 @@ export default function App() {
   const [initialRoute, setInitialRoute] = useState("Login");
   useEffect(() => {
     checkAuth();
+    
   }, []);
 
   const checkAuth = async () => {
     const user = supabase.auth.user();
-    alert(user.email)
+    console.log("Current user: ", user);
     if (user) {
       setInitialRoute("Chatbot");
     }
