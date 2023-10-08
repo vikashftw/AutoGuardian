@@ -1,8 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
-import React, { useState, useEffect } from 'react';
-
-import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, SafeAreaView, ScrollView} from 'react-native';
+import { useState, useEffect } from 'react';
 import logo from '../assets/logo.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';

@@ -21,7 +21,7 @@ const ProfilePage = ({ navigation }) => {
         const fetchedUser = {
             name: 'John Doe',
             email: 'johndoe@example.com',
-            avatar: 'link_to_avatar_image',
+            // avatar: 'link_to_avatar_image',
         };
 
         const fetchedCarInfo = {
