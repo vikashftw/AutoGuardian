@@ -8,7 +8,6 @@ import ProfilePage from './components/Profile';
 import TipsAndTricksPage from './components/TipsTricks';
 import MaintenanceSchedulePage from './components/MaintenanceSchedule';
 import MaintenanceHistoryPage from './components/MaintenanceHistory';
-import FindMechanicPage from './components/FindMechanic';
 
 const Stack = createNativeStackNavigator() 
 export default function App() {
