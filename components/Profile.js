@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    View, Text, TextInput, TouchableOpacity, Image, StyleSheet,
+    View, Text, TextInput, TouchableOpacity, Image, StyleSheet, SafeAreaView
 } from 'react-native';
 
 const ProfilePage = ({ navigation }) => {
@@ -45,7 +45,7 @@ const ProfilePage = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Image source={{ uri: user.avatar }} style={styles.avatar} />
                 <Text style={styles.username}>{user.name}</Text>
@@ -114,7 +114,7 @@ const ProfilePage = ({ navigation }) => {
                     <Text style={styles.footerText}>Chat</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F2F2F2',
-        padding: 20,
+        margin: 20,
     },
     header: {
         flexDirection: 'row',

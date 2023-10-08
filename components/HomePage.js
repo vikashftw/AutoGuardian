@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
 import logo from '../assets/logo.png';
 
 const HomePage = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <View style={styles.headerContainer}>
             <Text style={styles.headerText}>AutoGuardian</Text>
             <Image 
@@ -49,7 +49,7 @@ const HomePage = ({ navigation }) => {
                 <Text style={styles.footerText}>Chat</Text>
             </TouchableOpacity>
         </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#F3F4F6',  
-      padding: 20,
+      margin: 20,
     },
     headerContainer: {
       flexDirection: 'row',
