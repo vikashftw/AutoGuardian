@@ -29,6 +29,8 @@ const LoginPage = ({navigation}) => {
                     style={styles.button}
                     onPress={() => {
                         // Handle login button press
+                        console.log("Trying to navigate to Chatbot");
+                        navigation.navigate('Chatbot');
                     }}
                     >
                     <Text>Login</Text>

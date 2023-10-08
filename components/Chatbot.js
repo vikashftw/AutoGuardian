@@ -10,7 +10,11 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import styles from './styles';
+import styles from '../styles/styles';
+
+import { REACT_APP_OPENAI_API_KEY } from "@env";
+
+
 
 const Chatbot = () => {
   const [message, setMessage] = useState('');
@@ -42,7 +46,7 @@ const Chatbot = () => {
         max_tokens: 150,
       }, {
         headers: {
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
           'Content-Type': 'application/json',
         },
       });
