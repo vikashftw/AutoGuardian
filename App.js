@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import SignUpPage from './components/Signup';
 import ChatbotPage from './components/Chatbot';
 import HomePage from './components/HomePage';
+import ProfilePage from './components/Profile';
 
 const Stack = createNativeStackNavigator() 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
             <Stack.Screen name="SignUp" component={SignUpPage}/>
             <Stack.Screen name="Chatbot" component={ChatbotPage}/>
             <Stack.Screen name="HomePage" component={HomePage}/>
+            <Stack.Screen name="Profile" component={ProfilePage}/>
           </Stack.Navigator>
         </NavigationContainer>
       );
