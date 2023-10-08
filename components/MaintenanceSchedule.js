@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Picker, Button, TextInput  } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Button, TextInput  } from 'react-native';
 import DatePicker from 'react-native-datepicker'; 
+import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform, DatePickerIOS } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, Modal, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Modal, TextInput, SafeAreaView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -21,7 +21,7 @@ const MaintenanceHistoryPage = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Maintenance History</Text>
 
             <FlatList 
@@ -88,7 +88,7 @@ const MaintenanceHistoryPage = ({ navigation }) => {
                     <Text style={styles.footerText}>Chat</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#F3F4F6',
-      padding: 20,
+      margin: 20,
     },
     title: {
       fontSize: 24,

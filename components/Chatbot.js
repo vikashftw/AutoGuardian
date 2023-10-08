@@ -10,10 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { OPENAI_KEY } from '@env';
 
 
-
-
-
-const Chatbot = () => {
+const Chatbot = ({navigation}) => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
