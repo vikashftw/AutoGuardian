@@ -45,7 +45,7 @@ const HomePage = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                 <Text style={styles.footerText}>Profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
                 <Text style={styles.footerText}>Chat</Text>
             </TouchableOpacity>
         </View>
@@ -56,7 +56,7 @@ const HomePage = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#D62311',
+      backgroundColor: '#F3F4F6',  
       padding: 20,
     },
     headerContainer: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
       fontSize: 24, 
-      color: 'white', 
+      color: '#333',  
       marginRight: 10,
     },
     body: {
@@ -76,13 +76,13 @@ const styles = StyleSheet.create({
     },
     sectionTitle: {
       fontSize: 20,
-      color: 'white',
+      color: '#333',
       marginVertical: 10,
     },
     notificationText: {
       fontSize: 16,
       color: '#FFF',
-      backgroundColor: '#E94B35',
+      backgroundColor: '#3498db',  
       padding: 12,
       borderRadius: 8,
       marginVertical: 5,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     statusText: {
       fontSize: 16,
       color: '#FFF',
-      backgroundColor: '#E94B35',
+      backgroundColor: '#E74C3C',  
       padding: 12,
       borderRadius: 8,
       marginVertical: 5,
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
       padding: 15,
       borderRadius: 10,
       marginVertical: 10,
-      elevation: 3,  // For Android shadow
-      shadowColor: '#000', // For iOS shadow
+      elevation: 3,
+      shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.2,
       shadowRadius: 2,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
       color: '#555',
     },
     findMechanicBtn: {
-      backgroundColor: 'white',
+      backgroundColor: '#3498db',  
       padding: 12,
       borderRadius: 8,
       justifyContent: 'center',
@@ -141,18 +141,26 @@ const styles = StyleSheet.create({
     },
     btnText: {
       fontSize: 18,
-      color: '#D62311',
+      color: '#FFF',  
     },
     footer: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'space-around',
       alignItems: 'center',
-      flex: 1,
+      borderTopWidth: 1,
+      borderTopColor: '#E0E0E0',  
+      paddingVertical: 10,
+      backgroundColor: '#FFF',
+      elevation: 3,
+      shadowOffset: { width: 0, height: -2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 2,
     },
     footerText: {
-      fontSize: 18,
-      color: 'white',
+      fontSize: 16,
+      color: '#3498db',
+      fontWeight: '500',
     },
   });
 
-  export default HomePage;
+export default HomePage;
