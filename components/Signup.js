@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert,TouchableOpacity } from 'react-native';
 import { supabase } from '../supabase';
 
 const SignUpPage = () => {
@@ -26,6 +26,11 @@ const SignUpPage = () => {
 
     return (
         <View style={styles.container}>
+            <Text 
+                style={{fontSize: 24, color: 'white', flexDirection:'row', textAlign:'center', marginBottom:20}}
+            >
+                Create account
+            </Text>
             <TextInput 
                 placeholder="Email" 
                 value={email}
@@ -46,10 +51,22 @@ const SignUpPage = () => {
                 secureTextEntry={true} 
                 style={styles.input}
             />
-            <Button 
-                title={loading ? "Signing up..." : "Sign Up"}
-                onPress={signUpWithEmail}
-            />
+           <TouchableOpacity
+              style={{
+                marginHorizontal:100,
+                marginVertical:15,
+                flexDirection: 'row',
+                backgroundColor: 'white',
+                borderRadius: 5,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingVertical: 6,  
+                paddingHorizontal: 8  
+              }}
+              onPress={signUpWithEmail}
+            >
+              <Text style={{color: 'black', fontSize: 20}}>Sign up</Text>
+            </TouchableOpacity>
         </View>
     );
 };
