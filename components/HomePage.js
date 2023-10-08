@@ -107,7 +107,7 @@ const FeatureCards = ({ navigation, maintenanceData }) => {
     };
     
 const FindMechanicBtn = () => (
-    <TouchableOpacity style={styles.findMechanicBtn} onPress={() => navigation.navigate('FindMechanic')}>
+    <TouchableOpacity style={styles.findMechanicBtn} onPress={()=> {}}>
     <View style={styles.btnContent}>
         <Icon name="wrench" size={24} color="#FFF" style={styles.btnIcon} />
         <Text style={styles.btnText}>Find a Mechanic</Text>
