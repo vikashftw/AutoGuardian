@@ -16,10 +16,14 @@ export default function App() {
   }, []);
 
   const checkAuth = async () => {
-    const user = supabase.auth.user();
-    console.log("Current user: ", user);
-    if (user) {
-      setInitialRoute("Chatbot");
+    try{
+      const user = supabase.auth.user();
+      console.log("Current user: ", user);
+      if (user) {
+        setInitialRoute("HomePage");
+      }
+    }catch(error){
+      console.log(error)
     }
   };
 

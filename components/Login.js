@@ -20,7 +20,7 @@ const LoginPage = ({navigation}) => {
 
     if (error) Alert.alert(error.message)
     else{
-      navigation.navigate('Chatbot')
+      navigation.navigate('HomePage')
     }
     setLoading(false)
   };
