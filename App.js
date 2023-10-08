@@ -26,7 +26,6 @@ export default function App() {
             <Stack.Screen name="TipsTricks" component={TipsAndTricksPage}/>
             <Stack.Screen name="MaintenanceSchedule" component={MaintenanceSchedulePage}/>
             <Stack.Screen name="MaintenanceHistory" component={MaintenanceHistoryPage}/>
-            <Stack.Screen name="FindMechanic" component={FindMechanicPage}/>
 
           </Stack.Navigator>
         </NavigationContainer>
