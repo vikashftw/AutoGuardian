@@ -12,8 +12,8 @@ export default StyleSheet.create({
   userMessage: {
     alignSelf: 'flex-end',
     backgroundColor: '#007BFF',
-    padding: 10,
-    borderRadius: 10,
+    padding: 50,
+    borderRadius: 4,
     marginBottom: 10,
     maxWidth: '80%',
   },

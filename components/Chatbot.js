@@ -83,17 +83,18 @@ const Chatbot = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={chatHistory}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        style={styles.messageContainer}
-      />
-    
-      {isLoading && (
-        <ActivityIndicator size="large" color="#0000ff" style={styles.loadingIndicator} />
-      )}
-    
+      <View style={{flex:1}}>
+        <FlatList
+          data={chatHistory}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          style={styles.messageContainer}
+        />
+      
+        {isLoading && (
+          <ActivityIndicator size="large" color="#0000ff" style={styles.loadingIndicator} />
+        )}
+      </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.inputContainer}
@@ -108,21 +109,6 @@ const Chatbot = ({navigation}) => {
           <Text style={styles.sendButtonText}>Send</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-      
-    <View style={styles.footer}>
-      <TouchableOpacity onPress={() => {}}>
-        <Icon name="home" size={20} color="#2980B9" />
-        <Text style={styles.footerText}>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-        <Icon name="user" size={20} color="#2980B9" />
-        <Text style={styles.footerText}>Profile</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
-        <Icon name="comments" size={20} color="#2980B9" />
-        <Text style={styles.footerText}>Chat</Text>
-      </TouchableOpacity>
-    </View>
     </SafeAreaView>
   );
 }

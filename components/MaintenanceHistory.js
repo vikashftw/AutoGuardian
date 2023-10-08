@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Modal, TextInput, SafeAreaView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { Footer } from './HomePage';
 const MaintenanceHistoryPage = ({ navigation }) => {
     const [maintenanceHistories, setMaintenanceHistories] = useState([]);
     const [isModalVisible, setModalVisible] = useState(false);
@@ -21,9 +21,9 @@ const MaintenanceHistoryPage = ({ navigation }) => {
     };
 
     return (
+        <View style={{flex:1}}>
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Maintenance History</Text>
-
             <FlatList 
                 data={maintenanceHistories}
                 keyExtractor={(item, index) => index.toString()}
@@ -35,7 +35,6 @@ const MaintenanceHistoryPage = ({ navigation }) => {
                     </View>
                 )}
             />
-
             <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
                 <Icon name="plus" size={20} color="#FFF" />
             </TouchableOpacity>
@@ -72,23 +71,9 @@ const MaintenanceHistoryPage = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </Modal>
-
-            {/* Footer */}
-            <View style={styles.footer}>
-                <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
-                    <Icon name="home" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Icon name="user" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Profile</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
-                    <Icon name="comments" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Chat</Text>
-                </TouchableOpacity>
-            </View>
         </SafeAreaView>
+        <Footer navigation={navigation} />
+        </View>
     );
 };
 
@@ -123,7 +108,7 @@ const styles = StyleSheet.create({
     addButton: {
       position: 'absolute',
       right: 20,
-      bottom: 150,
+      bottom: 5,
       backgroundColor: '#3498db',
       borderRadius: 50,
       width: 50,

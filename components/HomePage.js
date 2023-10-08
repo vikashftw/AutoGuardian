@@ -32,27 +32,29 @@ const HomePage = ({ navigation }) => {
     }, [])
   );
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>AutoGuardian</Text>
-        <Image style={styles.logo} source={logo} />
-      </View>
-
-      {/* Body */}
-      <View style={styles.body}>
-        <NotificationSection />
-        <StatusSection />
-
-        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <FeatureCards navigation={navigation} maintenanceData={maintenanceData} />
-        </ScrollView>
-
-        <View style={styles.scrollIndicatorContainer}>
-          <Icon name="angle-down" size={24} color="#95A5A6" />
+    <View style={{flex:1}}>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerText}>AutoGuardian</Text>
+          <Image style={styles.logo} source={logo} />
         </View>
 
-        <FindMechanicBtn />
+        {/* Body */}
+        <View style={styles.body}>
+          <NotificationSection />
+          <StatusSection />
+
+          <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+          <FeatureCards navigation={navigation} maintenanceData={maintenanceData} />
+          </ScrollView>
+
+          <View style={styles.scrollIndicatorContainer}>
+            <Icon name="angle-down" size={24} color="#95A5A6" />
+          </View>
+
+          <FindMechanicBtn />
+        </View>
       </View>
 
       {/* Footer */}
@@ -115,17 +117,17 @@ const FindMechanicBtn = () => (
     </TouchableOpacity>
 );
 
-const Footer = ({ navigation }) => (
+export const Footer = ({ navigation }) => (
     <View style={styles.footer}>
-      <TouchableOpacity onPress={() => {}}>
-        <Icon name="home" size={20} color="#2980B9" />
+      <TouchableOpacity style={styles.footerComp} onPress={() => navigation.navigate('HomePage')}>
+        <Icon  name="home" size={20} color="#2980B9" />
         <Text style={styles.footerText}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+      <TouchableOpacity style={styles.footerComp} onPress={() => navigation.navigate('Profile')}>
         <Icon name="user" size={20} color="#2980B9" />
         <Text style={styles.footerText}>Profile</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
+      <TouchableOpacity style={styles.footerComp} onPress={() => navigation.navigate('Chatbot')}>
         <Icon name="comments" size={20} color="#2980B9" />
         <Text style={styles.footerText}>Chat</Text>
       </TouchableOpacity>
@@ -228,16 +230,25 @@ const styles = StyleSheet.create({
     },
     footer: {
       flexDirection: 'row',
+      paddingHorizontal: 20,
+      width: '100%',
       justifyContent: 'space-between',
       alignItems: 'center',
       borderTopWidth: 1,
       borderTopColor: '#DDE2E7',
-      paddingVertical: 20,
+      paddingBottom:30,
+      paddingTop:10,
       backgroundColor: '#FFF',
       elevation: 4,
       shadowOffset: { width: 0, height: -3 },
       shadowOpacity: 0.1,
       shadowRadius: 3,
+    },
+    footerComp: {
+      flexDirection:'row', 
+      alignItems:'flex-end', 
+      justifyContent:'center',
+      gap:10,
     },
 
     footerText: {

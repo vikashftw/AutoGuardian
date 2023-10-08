@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
     View, Text, TextInput, TouchableOpacity, Image, StyleSheet, SafeAreaView
 } from 'react-native';
-
+import { Footer } from './HomePage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -48,79 +48,68 @@ const ProfilePage = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Image source={{ uri: user.avatar }} style={styles.avatar} />
-                <Text style={styles.username}>{user.name}</Text>
-            </View>
 
-            <View style={styles.infoContainer}>
-                <Text style={styles.sectionTitle}>User Information</Text>
-                <View style={styles.infoSection}>
-                    <Text style={styles.label}>Email:</Text>
-                    <TextInput 
-                        value={user.email} 
-                        onChangeText={(email) => setUser({ ...user, email })}
-                        style={styles.input} 
-                        editable={isEditing} 
-                    />
-                </View>
-                
-                <Text style={styles.sectionTitle}>Car Information</Text>
-                <View style={styles.infoSection}>
-                    <Text style={styles.label}>Make:</Text>
-                    <TextInput 
-                        value={carInfo.make}
-                        onChangeText={(make) => setCarInfo({ ...carInfo, make })}
-                        style={styles.input} 
-                        editable={isEditing} 
-                    />
-                </View>
-                <View style={styles.infoSection}>
-                    <Text style={styles.label}>Model:</Text>
-                    <TextInput 
-                        value={carInfo.model}
-                        onChangeText={(model) => setCarInfo({ ...carInfo, model })}
-                        style={styles.input} 
-                        editable={isEditing} 
-                    />
-                </View>
-                <View style={styles.infoSection}>
-                    <Text style={styles.label}>Year:</Text>
-                    <TextInput 
-                        value={carInfo.year}
-                        onChangeText={(year) => setCarInfo({ ...carInfo, year })}
-                        style={styles.input} 
-                        editable={isEditing} 
-                    />
+        <View style={{flex:1}}>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.header}>
+                    <Image source={{ uri: user.avatar }} style={styles.avatar} />
+                    <Text style={styles.username}>{user.name}</Text>
                 </View>
 
-                {isEditing ? (
-                    <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-                        <Text style={styles.buttonText}>Save</Text>
-                    </TouchableOpacity>
-                ) : (
-                    <TouchableOpacity style={styles.editButton} onPress={() => setIsEditing(true)}>
-                        <Text style={styles.buttonText}>Edit Profile</Text>
-                    </TouchableOpacity>
-                )}
-            </View>
+                <View style={styles.infoContainer}>
+                    <Text style={styles.sectionTitle}>User Information</Text>
+                    <View style={styles.infoSection}>
+                        <Text style={styles.label}>Email:</Text>
+                        <TextInput 
+                            value={user.email} 
+                            onChangeText={(email) => setUser({ ...user, email })}
+                            style={styles.input} 
+                            editable={isEditing} 
+                        />
+                    </View>
+                    
+                    <Text style={styles.sectionTitle}>Car Information</Text>
+                    <View style={styles.infoSection}>
+                        <Text style={styles.label}>Make:</Text>
+                        <TextInput 
+                            value={carInfo.make}
+                            onChangeText={(make) => setCarInfo({ ...carInfo, make })}
+                            style={styles.input} 
+                            editable={isEditing} 
+                        />
+                    </View>
+                    <View style={styles.infoSection}>
+                        <Text style={styles.label}>Model:</Text>
+                        <TextInput 
+                            value={carInfo.model}
+                            onChangeText={(model) => setCarInfo({ ...carInfo, model })}
+                            style={styles.input} 
+                            editable={isEditing} 
+                        />
+                    </View>
+                    <View style={styles.infoSection}>
+                        <Text style={styles.label}>Year:</Text>
+                        <TextInput 
+                            value={carInfo.year}
+                            onChangeText={(year) => setCarInfo({ ...carInfo, year })}
+                            style={styles.input} 
+                            editable={isEditing} 
+                        />
+                    </View>
 
-            <View style={styles.footer}>
-                <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
-                    <Icon name="home" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Icon name="user" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Profile</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
-                    <Icon name="comments" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Chat</Text>
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
+                    {isEditing ? (
+                        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+                            <Text style={styles.buttonText}>Save</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity style={styles.editButton} onPress={() => setIsEditing(true)}>
+                            <Text style={styles.buttonText}>Edit Profile</Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
+            </SafeAreaView>
+            <Footer navigation={navigation} />
+        </View>
     );
 };
 

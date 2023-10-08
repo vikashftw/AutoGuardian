@@ -5,6 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Footer } from './HomePage';
 
 
 const PlatformDatePicker = ({ date, onDateChange, ...props }) => {
@@ -92,59 +93,48 @@ const MaintenanceSchedulePage = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Maintenance Schedule</Text>
+    <View style={{flex:1}}>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>Maintenance Schedule</Text>
 
-      <View style={styles.inputGroup}>
-        <Text>Mileage:</Text>
-        <TextInput 
-          style={styles.input}
-          keyboardType="numeric"
-          value={mileage}
-          onChangeText={setMileage}
-          placeholder="Enter mileage (in miles)"
-        />
-      </View>
+        <View style={styles.inputGroup}>
+          <Text>Mileage:</Text>
+          <TextInput 
+            style={styles.input}
+            keyboardType="numeric"
+            value={mileage}
+            onChangeText={setMileage}
+            placeholder="Enter mileage (in miles)"
+          />
+        </View>
 
-      <View style={styles.inputGroup}>
-        <Text>Last Maintenance:</Text>
-        <PlatformDatePicker date={lastMaintenance} onDateChange={setLastMaintenance}/>
-      </View>
+        <View style={styles.inputGroup}>
+          <Text>Last Maintenance:</Text>
+          <PlatformDatePicker date={lastMaintenance} onDateChange={setLastMaintenance}/>
+        </View>
 
-      <View style={styles.inputGroup}>
-        <Text>Last Oil Change:</Text>
-        <PlatformDatePicker date={lastOilChange} onDateChange={setLastOilChange}/>
-      </View>
+        <View style={styles.inputGroup}>
+          <Text>Last Oil Change:</Text>
+          <PlatformDatePicker date={lastOilChange} onDateChange={setLastOilChange}/>
+        </View>
 
-      <View style={styles.inputGroup}>
-        <Text>Maintenance Frequency:</Text>
-        <Picker selectedValue={frequency} onValueChange={setFrequency}>
-          <Picker.Item label="Every Month" value="1" />
-          <Picker.Item label="Every 3 Months" value="3" />
-          <Picker.Item label="Every 6 Months" value="6" />
-          <Picker.Item label="Annually" value="12" />
-        </Picker>
-      </View>
+        <View style={styles.inputGroup}>
+          <Text>Maintenance Frequency:</Text>
+          <Picker selectedValue={frequency} onValueChange={setFrequency}>
+            <Picker.Item label="Every Month" value="1" />
+            <Picker.Item label="Every 3 Months" value="3" />
+            <Picker.Item label="Every 6 Months" value="6" />
+            <Picker.Item label="Annually" value="12" />
+          </Picker>
+        </View>
 
-      <Text>Next Maintenance Due: {nextMaintenanceText}</Text>
+        <Text>Next Maintenance Due: {nextMaintenanceText}</Text>
 
-      <Button title="Save" onPress={saveMaintenanceInfo} />
+        <Button title="Save" onPress={saveMaintenanceInfo} />
+      </SafeAreaView>
+      <Footer navigation={navigation} />
+    </View>
 
-      <View style={styles.footer}>
-                <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
-                    <Icon name="home" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Icon name="user" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Profile</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
-                    <Icon name="comments" size={20} color="#2980B9" />
-                    <Text style={styles.footerText}>Chat</Text>
-                </TouchableOpacity>
-            </View>
-    </SafeAreaView>
   );
 };
 
