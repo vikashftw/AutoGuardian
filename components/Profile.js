@@ -3,6 +3,9 @@ import {
     View, Text, TextInput, TouchableOpacity, Image, StyleSheet,
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+
 const ProfilePage = ({ navigation }) => {
     const [user, setUser] = useState({});
     const [carInfo, setCarInfo] = useState({});
@@ -105,12 +108,15 @@ const ProfilePage = ({ navigation }) => {
 
             <View style={styles.footer}>
                 <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+                    <Icon name="home" size={20} color="#2980B9" />
                     <Text style={styles.footerText}>Home</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                    <Icon name="user" size={20} color="#2980B9" />
                     <Text style={styles.footerText}>Profile</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
+                    <Icon name="comments" size={20} color="#2980B9" />
                     <Text style={styles.footerText}>Chat</Text>
                 </TouchableOpacity>
             </View>
@@ -139,15 +145,15 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     username: {
-        fontSize: 28,
-        color: '#333',
+        fontSize: 24,
+        color: '#2980B9',
         fontWeight: 'bold',
     },
     infoContainer: {
         flex: 1,
         backgroundColor: 'white',
-        borderRadius: 15,
-        padding: 20,
+        borderRadius: 12,
+        padding: 18, 
         elevation: 3,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },
@@ -155,8 +161,8 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
     },
     sectionTitle: {
-        fontSize: 24,
-        color: '#333',
+        fontSize: 22,
+        color: '#2980B9', 
         marginBottom: 20,
         fontWeight: '600',
     },
@@ -164,7 +170,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 20,
+        marginBottom: 18, 
     },
     label: {
         fontSize: 18,
@@ -178,11 +184,10 @@ const styles = StyleSheet.create({
         width: '65%',
         textAlign: 'right',
     },
-
     editButton: {
-        backgroundColor: '#3498db',
+        backgroundColor: '#2980B9', 
         padding: 12,
-        borderRadius: 8,
+        borderRadius: 12,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 3,
@@ -192,9 +197,9 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
     },
     saveButton: {
-        backgroundColor: '#2ecc71',
+        backgroundColor: '#2ecc71', 
         padding: 12,
-        borderRadius: 8,
+        borderRadius: 12,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 3,
@@ -209,22 +214,24 @@ const styles = StyleSheet.create({
     },
     footer: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignItems: 'center',
         borderTopWidth: 1,
-        borderTopColor: '#E0E0E0',
-        paddingVertical: 10,
-        backgroundColor: '#FFF',  
-        elevation: 3, 
-        shadowOffset: { width: 0, height: -2 },  
+        borderTopColor: '#DDE2E7',
+        paddingVertical: 20,
+        backgroundColor: '#FFF',
+        elevation: 4,
+        shadowOffset: { width: 0, height: -3 },
         shadowOpacity: 0.1,
-        shadowRadius: 2,
-    },
-    footerText: {
-        fontSize: 16,
-        color: '#3498db',  
-        fontWeight: '500',
-    },
+        shadowRadius: 3,
+      },
+  
+      footerText: {
+        fontSize: 18,
+        color: '#2980B9',
+        fontWeight: '600',
+        marginTop: 10, 
+      },
 });
 
 

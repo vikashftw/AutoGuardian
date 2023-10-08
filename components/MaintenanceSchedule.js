@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Picker, Button } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Picker, Button, TextInput  } from 'react-native';
 import DatePicker from 'react-native-datepicker'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform, DatePickerIOS } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 const PlatformDatePicker = ({ date, onDateChange, ...props }) => {
   if (Platform.OS === 'web') {
@@ -32,17 +34,40 @@ const PlatformDatePicker = ({ date, onDateChange, ...props }) => {
 
 
 const MaintenanceSchedulePage = ({ navigation }) => {
+  
   const [lastMaintenance, setLastMaintenance] = useState(new Date());
   const [frequency, setFrequency] = useState('1'); // Default to "Every Month"
   const [nextMaintenance, setNextMaintenance] = useState(new Date());
 
+  const [mileage, setMileage] = useState(''); // For storing car's current mileage
+  const [lastOilChange, setLastOilChange] = useState(new Date());
+
   useEffect(() => {
     const lastDate = new Date(lastMaintenance);
     const nextDate = new Date(lastMaintenance);
+  
+    const parsedMileage = parseInt(mileage, 10);
+    let timeBasedNextDate;
+  
+    if (!isNaN(parsedMileage)) {
+      if (parsedMileage % 5000 === 0) {
+        timeBasedNextDate = "It's time for an oil change!";
+      } else if (parsedMileage % 15000 === 0) {
+        timeBasedNextDate = "It's time to replace the air filter!";
+      } else if (parsedMileage % 30000 === 0) {
+        timeBasedNextDate = "It's time to change the air filter, fuel filter, and spark plugs!";
+      } else if (parsedMileage % 40000 === 0) {
+        timeBasedNextDate = "Inspect the ignition system and suspension!";
+      } else if (parsedMileage % 60000 === 0) {
+        timeBasedNextDate = "Replace brake fluid, pads, coolant, and inspect the transmission fluid!";
+      }
+    }
+  
     nextDate.setMonth(lastDate.getMonth() + parseInt(frequency));
-
-    setNextMaintenance(nextDate);
-  }, [lastMaintenance, frequency]);
+    const formattedNextDate = timeBasedNextDate || nextDate.toDateString();
+  
+    setNextMaintenance(formattedNextDate);
+  }, [lastMaintenance, frequency, mileage]);
 
   const saveMaintenanceInfo = async () => {
     try {
@@ -64,10 +89,24 @@ const MaintenanceSchedulePage = ({ navigation }) => {
       <Text style={styles.title}>Maintenance Schedule</Text>
 
       <View style={styles.inputGroup}>
+        <Text>Mileage:</Text>
+        <TextInput 
+          style={styles.input}
+          keyboardType="numeric"
+          value={mileage}
+          onChangeText={setMileage}
+          placeholder="Enter mileage (in miles)"
+        />
+      </View>
+
+      <View style={styles.inputGroup}>
         <Text>Last Maintenance:</Text>
-        <PlatformDatePicker 
-        date={lastMaintenance}
-        onDateChange={setLastMaintenance}/>
+        <PlatformDatePicker date={lastMaintenance} onDateChange={setLastMaintenance}/>
+      </View>
+
+      <View style={styles.inputGroup}>
+        <Text>Last Oil Change:</Text>
+        <PlatformDatePicker date={lastOilChange} onDateChange={setLastOilChange}/>
       </View>
 
       <View style={styles.inputGroup}>
@@ -85,16 +124,19 @@ const MaintenanceSchedulePage = ({ navigation }) => {
       <Button title="Save" onPress={saveMaintenanceInfo} />
 
       <View style={styles.footer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.footerText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-          <Text style={styles.footerText}>Profile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
-          <Text style={styles.footerText}>Chat</Text>
-        </TouchableOpacity>
-      </View>
+                <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+                    <Icon name="home" size={20} color="#2980B9" />
+                    <Text style={styles.footerText}>Home</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                    <Icon name="user" size={20} color="#2980B9" />
+                    <Text style={styles.footerText}>Profile</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Chatbot')}>
+                    <Icon name="comments" size={20} color="#2980B9" />
+                    <Text style={styles.footerText}>Chat</Text>
+                </TouchableOpacity>
+            </View>
     </View>
   );
 };
@@ -191,22 +233,42 @@ const styles = StyleSheet.create({
     },
     footer: {
       flexDirection: 'row',
-      justifyContent: 'space-around',
+      justifyContent: 'space-between',
       alignItems: 'center',
       borderTopWidth: 1,
-      borderTopColor: '#E0E0E0',  
-      paddingVertical: 10,
+      borderTopColor: '#DDE2E7',
+      paddingVertical: 20,
       backgroundColor: '#FFF',
-      elevation: 3,
-      shadowOffset: { width: 0, height: -2 },
+      elevation: 4,
+      shadowOffset: { width: 0, height: -3 },
       shadowOpacity: 0.1,
+      shadowRadius: 3,
+    },
+
+    footerText: {
+      fontSize: 18,
+      color: '#2980B9',
+      fontWeight: '600',
+      marginTop: 10, 
+    },
+    inputGroup: {
+      marginVertical: 10,
+      padding: 15,
+      borderRadius: 10,
+      backgroundColor: 'white',
+      elevation: 3,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
       shadowRadius: 2,
     },
-    footerText: {
-      fontSize: 16,
-      color: '#3498db',
-      fontWeight: '500',
-    },
+    input: {
+      borderColor: '#E0E0E0',
+      borderWidth: 1,
+      borderRadius: 5,
+      padding: 10,
+      marginTop: 5,
+    }
   });
 
 export default MaintenanceSchedulePage;
