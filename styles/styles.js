@@ -35,7 +35,7 @@ export default StyleSheet.create({
     flex: 1,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'red',
+    borderColor: '#ddd',
     borderRadius: 10,
   },
   sendButton: {

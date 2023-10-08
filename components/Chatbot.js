@@ -16,6 +16,7 @@ import { REACT_APP_OPENAI_API_KEY } from "@env";
 
 
 
+
 const Chatbot = () => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
