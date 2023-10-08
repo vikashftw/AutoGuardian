@@ -2,25 +2,32 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert,TouchableOpacity } from 'react-native';
 import { supabase } from '../supabase';
 
-const SignUpPage = () => {
+const SignUpPage = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
     async function signUpWithEmail() {
-        if (password !== confirmPassword) {
-            Alert.alert("Passwords do not match!");
-            return;
+        try{
+            if (password !== confirmPassword) {
+                Alert.alert("Passwords do not match!");
+                return;
+            }
+            
+            setLoading(true);
+            const { error } = await supabase.auth.signUp({
+                email: email,
+                password: password,
+            });
+    
+            if (error) Alert.alert(error.message);
+            else{
+                navigation.navigate('HomePage')
+            }
+        }catch(error){
+            console.log(error)
         }
-        
-        setLoading(true);
-        const { error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-        });
-
-        if (error) Alert.alert(error.message);
         setLoading(false);
     }
 
