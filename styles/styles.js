@@ -12,18 +12,18 @@ export default StyleSheet.create({
   userMessage: {
     alignSelf: 'flex-end',
     backgroundColor: '#007BFF',
-    padding: 10,
-    fontSize:18,
-    borderRadius: 4,
+    padding: 12, // Increased padding for better readability
+    fontSize: 18,
+    borderRadius: 8, // Increased borderRadius for smoother corners
     marginBottom: 10,
     maxWidth: '80%',
   },
   botMessage: {
     alignSelf: 'flex-start',
     backgroundColor: '#e6e6e6',
-    padding: 10,
+    padding: 12, // Increased padding for consistency
     borderRadius: 10,
-    fontSize:18,
+    fontSize: 18,
     marginBottom: 10,
     maxWidth: '80%',
   },
@@ -80,7 +80,6 @@ export default StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
   },
-
   footerText: {
     fontSize: 18,
     color: '#2980B9',
