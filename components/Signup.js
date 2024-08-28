@@ -1,78 +1,72 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert,TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { supabase } from '../supabase';
 
-const SignUpPage = ({navigation}) => {
+const SignUpPage = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
     async function signUpWithEmail() {
-        try{
-            if (password !== confirmPassword) {
-                Alert.alert("Passwords do not match!");
-                return;
-            }
-            
-            setLoading(true);
+        if (password !== confirmPassword) {
+            Alert.alert("Passwords do not match!");
+            return;
+        }
+        
+        setLoading(true);
+
+        try {
             const { error } = await supabase.auth.signUp({
-                email: email,
+                email: email.trim(), // Trim email input to remove extra spaces
                 password: password,
             });
-    
-            if (error) Alert.alert(error.message);
-            else{
-                navigation.navigate('HomePage')
+
+            if (error) {
+                Alert.alert(error.message);
+            } else {
+                Alert.alert("Sign-up successful!");
+                navigation.navigate('HomePage');
             }
-        }catch(error){
-            console.log(error)
+        } catch (error) {
+            console.error("Error during sign-up:", error);
+            Alert.alert("An unexpected error occurred. Please try again.");
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     }
 
     return (
         <View style={styles.container}>
-            <Text 
-                style={{fontSize: 24, color: 'white', flexDirection:'row', textAlign:'center', marginBottom:20}}
-            >
-                Create account
-            </Text>
+            <Text style={styles.title}>Create account</Text>
             <TextInput 
-                placeholder="Email" 
+                placeholder="Email"
                 value={email}
                 onChangeText={setEmail}
                 style={styles.input}
+                autoCapitalize="none" // Ensure email input is not capitalized
+                keyboardType="email-address" // Use the email keyboard for better UX
             />
             <TextInput 
                 placeholder="Password"
-                value={password} 
+                value={password}
                 onChangeText={setPassword}
-                secureTextEntry={true} 
+                secureTextEntry={true}
                 style={styles.input}
             />
             <TextInput 
-                placeholder="Confirm Password" 
+                placeholder="Confirm Password"
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
-                secureTextEntry={true} 
+                secureTextEntry={true}
                 style={styles.input}
             />
-           <TouchableOpacity
-              style={{
-                marginHorizontal:100,
-                marginVertical:15,
-                flexDirection: 'row',
-                backgroundColor: 'white',
-                borderRadius: 5,
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingVertical: 6,  
-                paddingHorizontal: 8  
-              }}
-              onPress={signUpWithEmail}
+            <TouchableOpacity
+                style={styles.button}
+                onPress={signUpWithEmail}
+                disabled={loading} // Disable the button while loading
             >
-              <Text style={{color: 'black', fontSize: 20}}>Sign up</Text>
+                <Text style={styles.buttonText}>Sign up</Text>
             </TouchableOpacity>
         </View>
     );
@@ -85,11 +79,31 @@ const styles = StyleSheet.create({
         padding: 20,
         justifyContent: 'center',
     },
+    title: {
+        fontSize: 24,
+        color: 'white',
+        textAlign: 'center',
+        marginBottom: 20,
+    },
     input: {
         backgroundColor: '#FFF',
         padding: 10,
         marginVertical: 10,
         borderRadius: 5,
+    },
+    button: {
+        marginHorizontal: 100,
+        marginVertical: 15,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 10,
+    },
+    buttonText: {
+        color: 'black',
+        fontSize: 20,
     },
 });
 
